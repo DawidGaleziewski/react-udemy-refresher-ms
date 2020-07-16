@@ -7,7 +7,13 @@ import Person from "./Person/Person";
 
 class App extends Component {
   render() {
-    return <Person />;
+    return (
+      <div>
+        <Person name="John" age="28" />
+        <Person name="Tom" age="35" />
+        <Person name="Samantha" age="25" />
+      </div>
+    );
   }
 }
 
