@@ -5,7 +5,15 @@ import React from "react";
 const person = (props) => {
   console.log(props);
   // we will need Reac as this will be transform to React.createElement method
-  return <div>I am a person and I am {Math.floor(Math.random() * 30)} old</div>;
+
+  return (
+    <div>
+      <p>
+        I am a {props.name} and I am {props.age} old
+      </p>
+      <p>{props.children}</p>
+    </div>
+  );
 };
 
 export default person;

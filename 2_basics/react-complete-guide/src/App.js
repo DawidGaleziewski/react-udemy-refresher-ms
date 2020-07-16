@@ -6,12 +6,35 @@ import "./App.css";
 import Person from "./Person/Person";
 
 class App extends Component {
+  state = {
+    persons: [
+      { name: "John", age: 29 },
+      { name: "Max", age: 9 },
+      { name: "Samantha", age: 25 },
+    ],
+  };
+  switchNameHandler = () => {
+    console.log("was clicked");
+  };
+
   render() {
     return (
       <div>
-        <Person name="John" age="28" />
-        <Person name="Tom" age="35" />
-        <Person name="Samantha" age="25" />
+        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}
+        />
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+        />
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}
+        >
+          My hobbies are planking
+        </Person>
       </div>
     );
   }
