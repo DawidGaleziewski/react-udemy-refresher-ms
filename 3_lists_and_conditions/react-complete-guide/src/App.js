@@ -8,31 +8,32 @@ import Person from "./Person/Person";
 class App extends Component {
   state = {
     persons: [
-      { name: "John", age: 29 },
-      { name: "Max", age: 9 },
-      { name: "Samantha", age: 25 },
+      { name: "John", age: 29, _id: "abc1" },
+      { name: "Max", age: 9, _id: "abc2" },
+      { name: "Samantha", age: 25, _id: "abc3" },
     ],
     isPersonsToggled: true,
     otherState: "some other state that will not be updated",
   };
-  switchNameHandler = (newName) => {
-    console.log("was clicked");
+
+  deletePersonHandler = (index) => {
+    // const persons = this.state.persons.slice()
+    const persons = [...this.state.persons];
+    persons.splice(index, 1);
     this.setState({
-      persons: [
-        { name: newName, age: 29 },
-        { name: newName, age: 9 },
-        { name: newName, age: 25 },
-      ],
+      persons: persons,
     });
   };
 
-  nameChangedHandler = (event) => {
+  nameChangedHandler = (event, id) => {
+    const persons = [...this.state.persons];
+    const indexOfChangedItem = persons.findIndex((person) => person._id === id);
+    const person = { ...persons[indexOfChangedItem] };
+    person.name = event.target.value;
+    persons[indexOfChangedItem] = person;
+
     this.setState({
-      persons: [
-        { name: event.target.value, age: 29 },
-        { name: "STATIC", age: 9 },
-        { name: "STATIC", age: 25 },
-      ],
+      persons: persons,
     });
   };
 
@@ -51,35 +52,33 @@ class App extends Component {
       margin: "auto",
     };
 
+    let persons = null;
+    if (this.state.isPersonsToggled) {
+      persons = (
+        <div>
+          <ul>
+            {this.state.persons.map((person, index) => (
+              <Person
+                key={person._id}
+                name={person.name}
+                age={person.age}
+                onClickHandler={this.deletePersonHandler.bind(null, index)}
+                onChangeHandler={(event) => {
+                  this.nameChangedHandler(event, person._id);
+                }}
+              />
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
     return (
       <div>
         <button style={style} onClick={this.toggleNameHandler}>
           Switch Name
         </button>
-        {this.state.isPersonsToggled ? (
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-              onClickHandler={this.switchNameHandler.bind(this, "George")}
-              onChangeHandler={this.nameChangedHandler}
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              onClickHandler={this.switchNameHandler.bind(this, "Steven")}
-            />
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-              onClickHandler={() => {
-                this.switchNameHandler("MAXX!!");
-              }}
-            >
-              My hobbies are planking
-            </Person>
-          </div>
-        ) : null}
+        {persons}
       </div>
     );
   }
