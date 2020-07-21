@@ -30,6 +30,15 @@ class App extends Component {
       maxWidth: "1170px",
       textAlign: "center",
     };
+    const charList = this.state.world
+      .split("")
+      .map((char, index) => (
+        <CharComponent
+          key={index}
+          char={char}
+          onClick={this.deleteChar.bind(null, index)}
+        />
+      ));
     return (
       <div style={appStyle}>
         <InputWorld
@@ -41,14 +50,7 @@ class App extends Component {
           maxLength={10}
           minLength={3}
         />
-        <p>
-          {this.state.world.split("").map((char, index) => (
-            <CharComponent
-              char={char}
-              onClick={this.deleteChar.bind(null, index)}
-            />
-          ))}
-        </p>
+        <p>{charList}</p>
       </div>
     );
   }
