@@ -27,9 +27,3 @@ const style = {
   },
 };
 ```
-
-Ja bym zaczął od backendu. Jeśli masz zamiar używać REST api i np SPA to rozplanowałbym jakich danych będziesz potrzebował, np users, posts, likes, views, comments. Przedewszystkim jakie są relacje między tymi danymi np karzdy comment potrzebuje usera.
-
-Następnie rozplanowałbym jakie endpointy będą mi potrzebne by operować na tych danych np. user, comment, likes i dla każdego CRUD (jeśli jest on potrzebny) oraz jakie są wymogi by dokonać operacji na tych danych (np tylko urzytkownik który stworzył dany komentarz może go edytować lub usówać, ale już wszyscy mogą go odczytać).
-
-Na samym końcu zrobiłbym pod to np SPA i narysował w wireframie albo na kartce jakie widoki mi są potrzebne.
