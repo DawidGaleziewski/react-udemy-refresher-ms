@@ -27,3 +27,21 @@ const style = {
   },
 };
 ```
+
+## using media queries
+
+In order to use radium media queries we first need to wrap the whole app Style root:
+
+```javascript
+return (
+  <StyleRoot>
+    <div style={{ textAlign: "center" }}>
+      <h1 className={classes.join(" ")}>Hello from app component</h1>
+      <button style={style} onClick={this.toggleNameHandler}>
+        Switch Name
+      </button>
+      {persons}
+    </div>
+  </StyleRoot>
+);
+```
