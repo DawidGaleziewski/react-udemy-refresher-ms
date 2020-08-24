@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
+// import "./App.css";
 import Person from "./Person/Person";
 
 import styled from "styled-components";
+
+import classes from "./App.css";
 
 const StyledButton = styled.button`
   background-color: ${(props) => (props.alterNative ? "red" : "green")};
@@ -99,7 +101,7 @@ class App extends Component {
       // style.backgroundColor = "red";
     }
 
-    const classes = [];
+    // const classes = [];
     if (this.state.persons.length <= 2) {
       classes.push("red");
     }
@@ -108,15 +110,19 @@ class App extends Component {
       classes.push("bold");
     }
 
+    const ButtonClasses = [classes.Button];
+    console.log("button classes", ButtonClasses);
+
     return (
-      <div>
-        <h1 className={classes.join(" ")}>Hello from app component</h1>
-        <StyledButton
+      <div className={classes.red}>
+        <h1>Hello from app component</h1>
+        <button
+          className={ButtonClasses.join()}
           alterNative={this.state.isPersonsToggled}
           onClick={this.toggleNameHandler}
         >
           Switch Name
-        </StyledButton>
+        </button>
         {persons}
       </div>
     );
