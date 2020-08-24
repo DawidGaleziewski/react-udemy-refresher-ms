@@ -4,6 +4,24 @@ import Person from "./Person/Person";
 
 import styled from "styled-components";
 
+const StyledButton = styled.button`
+  background-color: ${(props) => (props.alterNative ? "red" : "green")};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  max-width: 200px;
+  display: block;
+  cursor: pointer;
+  &:hover {
+    background-color: ${(props) => (props.alterNative ? "black" : "white")};
+    opacity: 0.8;
+  }
+`;
+
 class App extends Component {
   state = {
     persons: [
@@ -93,7 +111,12 @@ class App extends Component {
     return (
       <div>
         <h1 className={classes.join(" ")}>Hello from app component</h1>
-        <button onClick={this.toggleNameHandler}>Switch Name</button>
+        <StyledButton
+          alterNative={this.state.isPersonsToggled}
+          onClick={this.toggleNameHandler}
+        >
+          Switch Name
+        </StyledButton>
         {persons}
       </div>
     );
