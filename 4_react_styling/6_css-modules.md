@@ -87,4 +87,12 @@ This is how we add individual classes on jsx
 
 object classes was imported from css file and has properties that are css classes.
 
-css modules is applied by build process. It transforms class names into unique ones
+css modules is applied by build process. It transforms class names into unique ones. Those are mapped to our classnames.
+
+## css modules in newer react version
+
+in newer react versions we dont have to to change much when it comes to CRA we just need to name the modules:
+name.module.css
+and Import it to our component
+
+import classes from 'name.module.css'
