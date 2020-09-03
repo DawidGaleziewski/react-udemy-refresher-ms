@@ -5,14 +5,14 @@ class ErrorBoundry extends Component {
     errorMessage: "",
   };
   componentDidCatch = (error, info) => {
-      this.setState({hasError: true, errorMessage: console.error();})
-  }
+    this.setState({ hasError: true, errorMessage: error });
+  };
   render() {
-      if(this.state.hasError){
-        return <h1>Something went wrong</h1>;
-      } else {
-          return this.props.children
-      }
+    if (this.state.hasError) {
+      return <h1>Something went wrong</h1>;
+    } else {
+      return this.props.children;
+    }
   }
 }
 

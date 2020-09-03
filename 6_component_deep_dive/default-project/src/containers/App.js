@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 // import "./App.css";
-import Person from "./Person/Person";
+import Person from "../components/Persons/Person/Person";
 
 import styled from "styled-components";
 
 import classes from "./App.css";
 
-import ErrorBoundry from "./ErrorBoundry/ErrorBoundry";
+import ErrorBoundry from "../components/ErrorBoundry/ErrorBoundry";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 const StyledButton = styled.button`
   background-color: ${(props) => (props.alterNative ? "red" : "green")};
@@ -47,15 +49,8 @@ class App extends Component {
 
   nameChangedHandler = (event, id) => {
     const persons = [...this.state.persons];
-    // Introducing logical error
     const indexOfChangedItem = persons.findIndex((person) => person._id === id);
-    // const indexOfChangedItem = persons.findIndex(
-    //   (person) => person.userId === id
-    // );
-
     const person = { ...persons[indexOfChangedItem] };
-    // Introducing error to app
-    // person.name = event.input.value;
     person.name = event.target.value;
     persons[indexOfChangedItem] = person;
 
@@ -75,20 +70,11 @@ class App extends Component {
     if (this.state.isPersonsToggled) {
       persons = (
         <div>
-          <ul>
-            {this.state.persons.map((person, index) => (
-              <ErrorBoundry key={person._id}>
-                <Person
-                  name={person.name}
-                  age={person.age}
-                  onClickHandler={this.deletePersonHandler.bind(null, index)}
-                  onChangeHandler={(event) => {
-                    this.nameChangedHandler(event, person._id);
-                  }}
-                />
-              </ErrorBoundry>
-            ))}
-          </ul>
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}
+          />
         </div>
       );
     }
@@ -104,19 +90,7 @@ class App extends Component {
     const ButtonClasses = [classes.Button];
     console.log("button classes", ButtonClasses);
 
-    return (
-      <div className={classes}>
-        <h1>Hello from app component</h1>
-        <button
-          className={ButtonClasses.join()}
-          alterNative={this.state.isPersonsToggled}
-          onClick={this.toggleNameHandler}
-        >
-          Switch Name
-        </button>
-        {persons}
-      </div>
-    );
+    return <div className={classes}>{persons}</div>;
   }
 }
 
